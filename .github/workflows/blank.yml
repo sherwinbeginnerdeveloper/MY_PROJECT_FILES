@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECH_WEBSITES</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: url('background.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: fadeIn 2s;
+        }
+        .cta {
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            color: #fff;
+            background-color: #007bff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .cta.secondary {
+            background-color: #28a745;
+        }
+        .cta:hover {
+            background-color: #0056b3;
+        }
+        .cta.secondary:hover {
+            background-color: #218838;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #designs {
+            padding: 50px;
+            background: #fff;
+            text-align: center;
+        }
+        .designs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .design-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s;
+        }
+        .design-card:hover {
+            transform: scale(1.05);
+        }
+        .design-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .design-card h3 {
+            margin: 10px;
+        }
+        .design-card p {
+            padding: 0 10px 10px;
+            color: #777;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="hero">
+            <h1>Transform Your Vision Into Stunning Websites with TECH_WEBSITES</h1>
+            <button class="cta" onclick="exploreDesigns()">Explore Designs</button>
+            <button class="cta secondary" onclick="getStarted()">Get Started</button>
+        </div>
+    </header>
+
+    <section id="designs">
+        <h2>Featured Designs</h2>
+        <div class="designs-container"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Website Design Shop</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const designs = [
+                { id: 1, name: 'Modern Portfolio', image: 'design1.jpg', description: 'A sleek and modern portfolio design.' },
+                { id: 2, name: 'E-commerce Shop', image: 'design2.jpg', description: 'Perfect for online stores and businesses.' },
+                { id: 3, name: 'Personal Blog', image: 'design3.jpg', description: 'Ideal for bloggers and content creators.' }
+            ];
+
+            const designsContainer = document.querySelector('.designs-container');
+            designs.forEach(design => {
+                const designCard = document.createElement('div');
+                designCard.classList.add('design-card');
+                
+                designCard.innerHTML = `
+                    <img src="${design.image}" alt="${design.name}">
+                    <h3>${design.name}</h3>
+                    <p>${design.description}</p>
+                `;
+                
+                designsContainer.appendChild(designCard);
+            });
+        });
+
+        function exploreDesigns() {
+            document.getElementById('designs').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getStarted() {
+            alert('Getting started is easy! Contact us for more details.');
+        }
+    </script>
+</body>
+</html>
+
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
